@@ -4,18 +4,28 @@ import React from 'react'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import Boton from '../components/Boton';
 import messi from '../../assets/messi.jpg'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function BlueScreen({navigation}) {
 
   const [email, setEmail] = useState('')
   const [clave, setClave] = useState('')
 
-  const handleLogin = () => {
-    // console.log(email, contraseña)
-    if (email.toLowerCase() == 'rocco' && clave.toLowerCase() == '51'){
+  const handleLogin = async () => {
+    if (email.toLowerCase() != '' && clave.toLowerCase() != ''){
+      // Guardar en el AsyncStorage
+      await AsyncStorage.setItem('nombrecito', email);
+      await AsyncStorage.setItem('edadcita', clave);
       navigation.navigate('Uno');
     }else{
-      Alert.alert('El nombre esta vacio!, se debe ingresar un numero positivo!');
+      let mensaje = "";
+      if (email.toLowerCase() == ''){
+        mensaje =  mensaje + "El Nombe esta vacio ";
+      }
+      if (clave.toLowerCase() == ''){
+        mensaje =  mensaje + "La edad esta vacia";
+      }
+      Alert.alert(mensaje);
     }
   }
 
@@ -39,6 +49,7 @@ export default function BlueScreen({navigation}) {
         value={clave}
         secureTextEntry={true} 
         placeholder="Ingrese su edad"
+        inputMode='numeric'
         onChangeText={input => setClave(input)}
       />
       <Boton onPress={handleLogin} titulo='INGRESAR' style={styles.button} />
