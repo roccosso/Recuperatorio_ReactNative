@@ -12,33 +12,33 @@ export default function BlueScreen({navigation}) {
 
   const handleLogin = () => {
     // console.log(email, contraseña)
-    if (email.toLowerCase() == 'rocco' && clave.toLowerCase() == 'bolan'){
+    if (email.toLowerCase() == 'rocco' && clave.toLowerCase() == '51'){
       navigation.navigate('Uno');
     }else{
-      Alert.alert('Usuario o contraseña incorrectos');
+      Alert.alert('El nombre esta vacio!, se debe ingresar un numero positivo!');
     }
   }
 
   return (
     <SafeAreaView style={[styles.container]}>
       <Image source={messi} style={styles.logo}/>
-      <Text style={[styles.textLabel]}>Email</Text>
+      <Text style={[styles.textLabel]}>Nombre</Text>
       <TextInput
         editable
         maxLength={20}
         style={styles.input}
-        placeholder="Ingrese su email"
+        placeholder="Ingrese su nombre"
         value={email}
         onChangeText={input => setEmail(input)}
       />
-      <Text style={[styles.textLabel]}>Contraseña</Text>
+      <Text style={[styles.textLabel]}>Edad</Text>
       <TextInput
         editable
         maxLength={20}
         style={styles.input}
         value={clave}
         secureTextEntry={true} 
-        placeholder="Ingrese su contraseña"
+        placeholder="Ingrese su edad"
         onChangeText={input => setClave(input)}
       />
       <Boton onPress={handleLogin} titulo='INGRESAR' style={styles.button} />
